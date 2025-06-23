@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribute to Ratan Tata</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00695c;
+      --secondary: #004d40;
+      --bg: #f0f4f8;
+      --text: #333;
+      --accent: #00acc1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: linear-gradient(to right, #00695c, #00acc1);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 105, 92, 0.7), rgba(0, 77, 64, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/2/29/Dr._A.P.J._Abdul_Kalam.jpg') center/cover no-repeat;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      max-width: 600px;
+      animation: fadeIn 3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .content {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .qualities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .image-highlight {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .image-wrapper {
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .image-wrapper img {
+      width: 80%;
+      max-width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .image-wrapper img:hover {
+      transform: scale(1.03);
+    }
+
+    .caption {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .quote-section {
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      padding: 3rem;
+      border-radius: 16px;
+      margin: 3rem auto;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 900px;
+    }
+
+    .quote-section p {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #333;
+    }
+
+    .timeline {
+      background: #ffffff;
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .timeline h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--primary);
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      border-left: 4px solid var(--primary);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+
+    .timeline-item p {
+      margin: 0.5rem 0 0;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer .social-icons {
+      margin-top: 1rem;
+    }
+
+    footer .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #e0f7fa;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #00695c;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ratan Tata Tribute</h1>
+    <nav>
+      <a href="#qualities">Qualities</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#quote">Quote</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Ratan Tata</h2>
+      <h3 class="subheading">Industrialist • Philanthropist • Visionary Leader</h3>
+      <p class="hero-description">
+        Ratan Naval Tata is an Indian industrialist, former chairman of Tata Sons, and a respected global business icon. Known for his integrity, humility, and visionary leadership, he redefined Indian industry with a commitment to ethics and innovation. His legacy inspires entrepreneurs and changemakers across the world.
+      </p>
+      <p class="hero-quote">“I don't believe in taking right decisions. I take decisions and then make them right.”</p>
+      <a href="#qualities" class="hero-btn">Explore His Qualities ↓</a>
+    </div>
+  </section>
+
+  <section class="content" id="qualities">
+    <h2>Admirable Qualities</h2>
+    <div class="qualities">
+      <div class="card">
+        <h3>Visionary Leadership</h3>
+        <p>Expanded Tata Group globally and brought innovation to every sector.</p>
+      </div>
+      <div class="card">
+        <h3>Ethical Business Practices</h3>
+        <p>Maintained honesty, transparency, and values at the core of all operations.</p>
+      </div>
+      <div class="card">
+        <h3>Philanthropy</h3>
+        <p>Dedicated significant resources toward education, healthcare, and rural development.</p>
+      </div>
+      <div class="card">
+        <h3>Humility</h3>
+        <p>Despite immense success, always remained grounded and approachable.</p>
+      </div>
+      <div class="card">
+        <h3>Innovation Driver</h3>
+        <p>Introduced the Tata Nano, a symbol of affordable innovation for the masses.</p>
+      </div>
+      <div class="card">
+        <h3>Global Vision</h3>
+        <p>Acquired international brands like Jaguar Land Rover, expanding India's presence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline" id="timeline">
+    <h2>Life Timeline</h2>
+    <div class="timeline-item"><h3>1937</h3><p>Born in Mumbai, India.</p></div>
+    <div class="timeline-item"><h3>1962</h3><p>Graduated from Cornell University in Architecture and Structural Engineering.</p></div>
+    <div class="timeline-item"><h3>1991</h3><p>Became chairman of Tata Group, ushering in a new era of globalization.</p></div>
+    <div class="timeline-item"><h3>2008</h3><p>Launched the Tata Nano, the world's cheapest car.</p></div>
+    <div class="timeline-item"><h3>2012</h3><p>Retired as Chairman, remained active in philanthropic initiatives.</p></div>
+    <div class="timeline-item"><h3>2021</h3><p>Honored with the Padma Vibhushan for his contributions to the nation.</p></div>
+  </section>
+
+  <section class="image-highlight">
+    <div class="image-wrapper">
+      <img src="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/4726/1728907384726-i" alt="Ratan Tata Smiling">
+      <p class="caption">Ratan Tata, a symbol of ethical leadership and human-centered progress.</p>
+    </div>
+  </section>
+
+  <section class="quote-section" id="quote">
+    <p>“Ups and downs in life are very important to keep us going, because a straight line even in an ECG means we are not alive.”</p>
+  </section>
+
+  <footer id="footer">
+    <p>Made with ❤️ by Srishti Aggarwal who admires Ratan Tata</p>
+    <a href="mailto:aggarwalsrishti881@gmail.com" style="color: #fff; text-decoration: none; font-size: 1.1rem;">
+      📩 Send a Message
+    </a>
+  </footer>
+
+  <script>
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const revealTimeline = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      timelineItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        if (itemTop < triggerBottom) {
+          item.classList.add('visible');
+        } else {
+          item.classList.remove('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealTimeline);
+    window.addEventListener('load', revealTimeline);
+  </script>
+</body>
+</html>
